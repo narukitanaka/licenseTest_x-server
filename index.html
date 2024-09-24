@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <!-- <meta name="robots" content="index, follow"> -->
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- css -->
+  <link rel="stylesheet" href="p-download.css">
+
+  <title>ライセンスキー生成</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+</head>
+
+<body>
+  <header></header>
+
+  <main>
+    <div class="p-lic_wrap">
+      <p>
+        下記のボタンをクリックしてデータベースに有効なライセンスキーを自動生成します。
+      </p>
+      <button id="createLic">ライセンスキーを生成する</button>
+      <div id="result"></div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#createLic').click(function () {
+        $.ajax({
+          url: 'generate_license.php', // PHPファイルへのリクエストを送信
+          method: 'POST',
+          success: function (response) {
+            $('#result').html('生成されたライセンスキー: ' + response); // 結果を表示
+          },
+          error: function (xhr, status, error) {
+            $('#result').html('エラーが発生しました: ' + error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
